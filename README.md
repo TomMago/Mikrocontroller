@@ -9,8 +9,8 @@ Ein kurze Installationsanleitung, vorerst für Linux.
 ### Vorraussetzungen
 
 Python: https://www.python.org/downloads/ oder über Paketmanager
-Numpy und Matplotlib: über pip oder Paketmanager - https://scipy.org/install.html
 
+Numpy und Matplotlib: über pip oder Paketmanager - https://scipy.org/install.html
 
 ### Installation
 
@@ -30,5 +30,5 @@ Installiere den Arduino IDE entweder von https://www.arduino.cc/en/Main/Software
 apt-get install arduino
 ```
 
-Füge nun die Librarys aus dem Ordner lib/ im IDE über Sketch/Import Library hinzu.
+Füge nun die Librarys aus dem Ordner lib/ im IDE über Sketch->Import Library hinzu.
 
