@@ -1,0 +1,11 @@
+Verbindungen:
+Arduino -> LCD
+
+COMMUNICATION:
+SDA 20 -> SDA
+SCL 21 -> SCL
+
+POWER:
+5V -> VCC
+GND -> GND
+

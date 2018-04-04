@@ -1,0 +1,4 @@
+Arduino Port -> Schaltung -> Arduino Port
+
+WMd:
+13 -> 220 Widerstand -> LED -> GND
