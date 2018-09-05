@@ -294,7 +294,7 @@ class MatplotPanel1(wx.Panel):
             #liest serielle Verbindung und teilt Daten auf in Array
             serline = ser.readline()
             checkstring="AM"
-            if checkstring in serline:
+            if str(checkstring) in str(serline):
                 serline=serline.replace("AM", " ")
                 motortemp = [int(val) for val in serline.split()]
                 #Pruefen ob Motorintervall
@@ -364,7 +364,7 @@ class MatplotPanel2(wx.Panel):
         while True:
             serline = ser.readline()
             checkstring="AU"
-            if checkstring in serline:
+            if str(checkstring) in str(serline):
                 serline=serline.replace("AU", " ")
                 ustemp = [int(val) for val in serline.split()]
                 if (len(ustemp)==3):
