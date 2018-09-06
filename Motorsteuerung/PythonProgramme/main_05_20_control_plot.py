@@ -232,8 +232,8 @@ class Controlpanel(wx.Panel):
         global lastChar
         if park.GetValue() == 0:
             park.SetValue(1)
-            ser.write("u")
-            ser.write("r")   # danach reset
+            ser.write("u".encode())
+            ser.write("r".encode())   # danach reset
             print("Einparken!")
         elif park.GetValue() == 1:
             park.SetValue(0)
@@ -542,7 +542,7 @@ class MatplotPanel3(wx.Panel):
             string = 'CM M0:'+str0+' M1:'+str1+' M2:'+str2+' M3:'+str3+'\n'
             print(string)
             for s in string:
-                ser.write(s)
+                ser.write(s.encode())
 
             # ser.write(bytes(string, 'UTF-8'))
 
