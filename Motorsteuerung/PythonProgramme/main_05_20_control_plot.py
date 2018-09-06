@@ -290,9 +290,9 @@ class MatplotPanel1(wx.Panel):
         global motor
         while True:
             # liest serielle Verbindung und teilt Daten auf in Array
-            serline = ser.readline()
+            serline = str(ser.readline())
             checkstring = "AM"
-            if str(checkstring) in str(serline):
+            if checkstring in serline:
                 serline = serline.replace("AM", " ")
                 motortemp = [int(val) for val in serline.split()]
                 # Pruefen ob Motorintervall
@@ -363,7 +363,7 @@ class MatplotPanel2(wx.Panel):
     def receive(self):
         global us
         while True:
-            serline = ser.readline()
+            serline = str(ser.readline())
             checkstring = "AU"
             if str(checkstring) in str(serline):
                 serline = serline.replace("AU", " ")
