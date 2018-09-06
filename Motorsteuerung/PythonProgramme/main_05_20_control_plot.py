@@ -291,6 +291,13 @@ class MatplotPanel1(wx.Panel):
         while True:
             # liest serielle Verbindung und teilt Daten auf in Array
             serline = str(ser.readline())
+
+            ##
+            serline = serline.replace("b'", "")
+            serline = serline.replace("AU", "")
+            serline = serline[:-3]
+            ##
+
             checkstring = "AM"
             if checkstring in serline:
                 serline = serline.replace("AM", " ")
@@ -364,16 +371,21 @@ class MatplotPanel2(wx.Panel):
         global us
         while True:
             serline = str(ser.readline())
+
+            ##
+            serline = serline.replace("b'", "")
+            serline = serline.replace("AU", "")
+            serline = serline[:-3]
+            ##
+
             checkstring = "AU"
-            if str(checkstring) in str(serline):
-                serline = serline.replace("AU", " ")
+
+            if checkstring in serline:
+                print("======DEBUG")
+                print(serline)
                 ustemp = [int(val) for val in serline.split()]
-                print("DEBUG===============")
-                print(ustemp)
-                print(len(ustemp))
                 if (len(ustemp) == 3):
                     us = ustemp
-                    print(us)
             yield us
 
     def __init__(self, parent):
