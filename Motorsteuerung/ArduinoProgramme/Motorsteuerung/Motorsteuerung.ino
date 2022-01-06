@@ -176,14 +176,14 @@ void ausgabe(){
 void fahr() {
   //Vorwaerts
   if (D) {
-    Motor1->run(BACKWARD); //hab den Motorfalls angeschlossen ;) 
+    Motor1->run(FORWARD); 
     Motor2->run(FORWARD);
     Motor3->run(FORWARD);
     Motor4->run(FORWARD);
   }
   //Rueckwaerts
   else {
-    Motor1->run(FORWARD);
+    Motor1->run(BACKWARD);
     Motor2->run(BACKWARD);
     Motor3->run(BACKWARD);
     Motor4->run(BACKWARD);
@@ -392,4 +392,3 @@ void loop() {
   dimmer(SensorWert);
   //delay(20);
 }
-
