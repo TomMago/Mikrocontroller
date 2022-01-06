@@ -12,6 +12,7 @@ __author__ = 'alexander_stramma'
 #serial = serielle Schnittstelle http://matplotlib.org/contents.html
 
 import wx
+from wx.core import EndBusyCursor
 from wx.lib.splitter import MultiSplitterWindow
 import serial
 import numpy as np
@@ -22,6 +23,7 @@ import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 from matplotlib.patches import  Polygon
 from matplotlib.collections import PatchCollection
+import time
 
 
 
@@ -41,7 +43,7 @@ class Controlpanel(wx.Panel):
 
     #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
     #Arduino Programm am Computer oeffnen -> Werkzeuge -> Ports, und entsprechenden Port hier angebben
-    arduino_port="/dev/ttyACM0"
+    arduino_port="COM6"
     #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*
     #Baudrate muss mit hochgeladenem Arduino-Programm uebereinstimmen, sonst nur Hiroglyphen empfangbar
     arduino_baud=57600
@@ -292,8 +294,8 @@ class MatplotPanel1(wx.Panel):
         global motor
         while True:
             #liest serielle Verbindung und teilt Daten auf in Array
-            serline = ser.readline()
-            checkstring="AM"
+            serline = ser.readline().decode('UTF-8')
+            checkstring='AM'
             if checkstring in serline:
                 serline=serline.replace("AM", " ")
                 motortemp = [int(val) for val in serline.split()]
@@ -363,7 +365,7 @@ class MatplotPanel2(wx.Panel):
     def receive(self):
         global us
         while True:
-            serline = ser.readline()
+            serline = ser.readline().decode('UTF-8')
             checkstring="AU"
             if checkstring in serline:
                 serline=serline.replace("AU", " ")
@@ -431,13 +433,13 @@ class MatplotPanel3(wx.Panel):
                 if (MotorSet[0]==0)&(MotorSet[1]==0):
                     Direction=1
                 #Ueberlauf verhindern
-                if (MotorSet[0]<256)&(MotorSet[1]<256):
+                if (MotorSet[0]<100)&(MotorSet[1]<100):
                     MotorSet[0]=MotorSet[0]+MotorChange
                     MotorSet[1]=MotorSet[1]+MotorChange
             elif lastCommand[0]=='s':
                 if (MotorSet[0]==0)&(MotorSet[1]==0):
                     Direction=-1
-                if (MotorSet[0]>-256)&(MotorSet[1]>-256):
+                if (MotorSet[0]>-100)&(MotorSet[1]>-100):
                     MotorSet[0]=MotorSet[0]-MotorChange
                     MotorSet[1]=MotorSet[1]-MotorChange
             elif lastCommand[0]=='r':
@@ -524,10 +526,12 @@ class MatplotPanel3(wx.Panel):
 
             string='CM M0:'+str0+' M1:'+str1+' M2:'+str2+' M3:'+str3+'\n'
             print(string)
-            for s in string:
-                ser.write(s)
+            #for s in string:
+                #ser.write(s.encode(encoding='UTF-8'))
+                
 
-            #ser.write(bytes(string, 'UTF-8'))
+            time.sleep(1)
+            ser.write(bytes(string, 'UTF-8'))
 
             #Motorenwerte in xy-Koordinaten transformieren
             if Direction==1:
