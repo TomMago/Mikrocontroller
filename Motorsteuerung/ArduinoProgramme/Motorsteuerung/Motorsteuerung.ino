@@ -256,7 +256,8 @@ void serialEvent() {
       //C=Serial.readString();
       
       //String separieren und in Integer konvertieren
-      if (C.startsWith(teststring)){
+      //Überprüfen der Gesamte String angekommen ist
+      if (C.startsWith(teststring) && C.endsWith("\n")){
         ifrom=C.indexOf("M3:");
         //Serial.print(ifrom);
         substr=C.substring(ifrom+3,31);
