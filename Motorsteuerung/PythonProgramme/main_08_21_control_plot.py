@@ -611,7 +611,3 @@ if __name__=="__main__":
     frame=MyForm(parent=None,id=-1)         #startet neues Fenster und zeigt es ->MyForm Class __init__
     frame.Show()
     app.MainLoop()
-
-
-
-
